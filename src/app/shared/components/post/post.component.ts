@@ -11,6 +11,7 @@ import { CreateOrEditPostComponent } from '../create-or-edit-post/create-or-edit
 export class PostComponent implements OnInit {
 
   @Input() post: Post | undefined;
+  @Input() index: number | undefined;
 
   constructor(
     public dialog: MatDialog

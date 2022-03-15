@@ -1,21 +1,23 @@
-<h1 mat-dialog-title> isEdit ? 'Create' : 'Edit'</h1>
-<div mat-dialog-content>
-    <form [formGroup]="form">
-        <mat-form-field>
-            <mat-label>Favorite Animal</mat-label>
-            <input matInput formControlName="url">
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Favorite Animal</mat-label>
-            <input matInput formControlName="nombre">
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Favorite Animal</mat-label>
-            <input matInput formControlName="check">
-        </mat-form-field>
+<div mat-dialog>
+  <h1 mat-dialog-title> {{title}}</h1>
+  <div mat-dialog-content>
+    <form [formGroup]="formPost">
+      <div class="row">
+        <label for="title">Title: </label>
+        <input id="title" type="text" ng-model="ptitle" formControlName="title">
+      </div>
+      <div class="row">
+        <label for="content">Content: </label>
+        <input id="content" type="text" ng-model="pcontent" formControlName="content">
+      </div>
+      <div class="row">
+        <label  for="image">Image: </label>
+        <input id="image" type="text" ng-model="pimage" formControlName="image">
+      </div>
     </form>
-</div>
-<div mat-dialog-actions>
+  </div>
+  <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Cancel</button>
-    <button mat-button (click)="">Save</button>
+    <button mat-button (click)="CreateOrEdit()">Save</button>
+  </div>
 </div>
