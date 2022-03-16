@@ -13,10 +13,7 @@ import { FormGroup, FormControl } from '@angular/forms';
   
     title = 'New';
     post: Post = new Post();
-    formPost: FormGroup | undefined;
-    ptitle = '';
-    pcontent = '';
-    pimage = '';
+    formPost!: FormGroup;
 
     article: Article | undefined;
 
@@ -33,7 +30,11 @@ import { FormGroup, FormControl } from '@angular/forms';
         Object.assign(b , JSON.parse(a ? a : ''));
         this.article = b;
         if(this.data) {
-            
+            this.formPost = new FormGroup({
+                title: new FormControl(this.data.post.title),
+                content: new FormControl(this.data.post.content),
+                image: new FormControl(this.data.post.image)
+              });
         }
         else {
             this.formPost = new FormGroup({
@@ -52,23 +53,20 @@ import { FormGroup, FormControl } from '@angular/forms';
         if(this.data) {
             this.article?.articles?.forEach((item,i) => {
                 if(i === this.data.index) {
-                    item.content = this.post?.content;
-                    item.title = this.post?.title;
-                    item.url = this.post?.url;
+                    item.content = this.formPost.get('content')?.value;;
+                    item.title = this.formPost.get('title')?.value;
+                    item.url = this.formPost.get('image')?.value;
                 }
             });
-            localStorage.removeItem('article');
             localStorage.setItem('article',JSON.stringify(this.article));
             this.dialogRef.close(true);
         }
         else {
             let a = new Post();
-            this.pimage;
-            this.ptitle;
-            a.title = this.post?.title;
-            a.content = this.post?.content;
-            a.image = this.post?.image;
-            this.article?.articles?.push();
+            a.title = this.formPost.get('title')?.value;
+            a.content = this.formPost.get('content')?.value;
+            a.image = this.formPost.get('image')?.value;
+            this.article?.articles?.push(a);
             localStorage.setItem('article',JSON.stringify(this.article));
             this.dialogRef.close(true);
         }

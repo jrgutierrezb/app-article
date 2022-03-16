@@ -1,20 +1,18 @@
 <div mat-dialog>
   <h1 mat-dialog-title> {{title}}</h1>
-  <div mat-dialog-content>
-    <form [formGroup]="formPost">
+  <div mat-dialog-content [formGroup]="formPost">
       <div class="row">
         <label for="title">Title: </label>
-        <input id="title" type="text" ng-model="ptitle" formControlName="title">
+        <input id="title" type="text" formControlName="title"/>
       </div>
       <div class="row">
         <label for="content">Content: </label>
-        <input id="content" type="text" ng-model="pcontent" formControlName="content">
+        <input id="content" type="text" formControlName="content"/>
       </div>
       <div class="row">
         <label  for="image">Image: </label>
-        <input id="image" type="text" ng-model="pimage" formControlName="image">
+        <input id="image" type="text" formControlName="image"/>
       </div>
-    </form>
   </div>
   <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Cancel</button>

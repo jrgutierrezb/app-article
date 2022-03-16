@@ -1,6 +1,6 @@
 <div class="row">
-    <button type="button" class="btn btn-primary" (click)="openDialog()" >Primary</button>
+    <button type="button" class="btn btn-primary" (click)="openDialog()" >Nuevo</button>
 </div>
 <div class="row">
-    <app-post *ngFor="let item of posts; index as i;" [post]="item" [index]="i"></app-post>
+    <app-post *ngFor="let item of posts; index as i;" [post]="item" [index]="i" (edit)="Refresh($event)"></app-post>
 </div>

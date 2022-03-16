@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Article } from '../../Entities/article';
 import { Post } from '../../Entities/post';
 import { CreateOrEditPostComponent } from '../create-or-edit-post/create-or-edit-post.component';
 
@@ -11,7 +12,8 @@ import { CreateOrEditPostComponent } from '../create-or-edit-post/create-or-edit
 export class PostComponent implements OnInit {
 
   @Input() post: Post | undefined;
-  @Input() index: number | undefined;
+  @Input() index!: number;
+  @Output() edit = new EventEmitter<boolean>();
 
   constructor(
     public dialog: MatDialog
@@ -24,12 +26,22 @@ export class PostComponent implements OnInit {
     const dialogRef = this.dialog.open(CreateOrEditPostComponent, {
       width: '300px',
       height: '400px',
-      data:  this.post ,
+      data: { index: this.index, post:this.post },
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      this.edit.emit(result);
     });
+  }
+
+  Eliminar() {
+    let a = localStorage.getItem('article');
+    let b:Article = new Article();
+    Object.assign(b , JSON.parse(a ? a : ''));
+    debugger
+    b.articles?.splice(this.index, 1);
+    localStorage.setItem('article',JSON.stringify(b));
+    this.edit.emit(true);
   }
 
 }

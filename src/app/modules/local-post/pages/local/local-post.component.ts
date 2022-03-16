@@ -41,4 +41,9 @@ export class LocalPostComponent implements OnInit {
     });
   }
 
+  Refresh(event:any) {
+    let a = this.postService.GetAll();
+    this.posts = a.articles;
+  }
+
 }
